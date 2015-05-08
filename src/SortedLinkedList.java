@@ -1,6 +1,7 @@
 public class SortedLinkedList
 {
   private Node head;
+  private int length;
   
   /**
    * Create an empty list.
@@ -8,6 +9,7 @@ public class SortedLinkedList
   public SortedLinkedList()
   {
     head = null;
+    length = 0;
   }
   
   /**
@@ -34,8 +36,28 @@ public class SortedLinkedList
    */
   public String getName(int index)
   {
+    Node temp = head;
+    
+    // if the index is out of bounds return null
+    if (index < 0 || index >= length) {
+      return null;
+    } 
+    
+    // if the list is empty return null
+    if (temp == null) {
+      return null;
+    }
+
+    // if there is one element in the list
+    if (index == 0 && temp != null) {
+      return temp.getName();
+    }
+
+    return null;
     
   }
+      
+
   
   /**
    * This method will return the quantity at the specified index.  Similar to
@@ -44,7 +66,13 @@ public class SortedLinkedList
    */
   public int getQuantity(int index)
   {
+    Node temp = head;
     
+    // if the index is out of bounds return -1
+    if (index < 0 || index >= length) {
+      return -1;
+    }
+    return -1;
   }
   
   /**
@@ -52,7 +80,7 @@ public class SortedLinkedList
    */
   public int length()
   {
-    
+   return length;
   }
   
   /**
@@ -61,15 +89,32 @@ public class SortedLinkedList
    */
   public boolean isMember(String name)
   {
-    
+    Node node = head;
+    boolean found = false;
+    while (node != null && !found) {
+      if (node.getName().equals(name)) {
+        found = true;
+      }
+      else {
+        node = node.getNext();
+      }
+    }
+    return found;
   }
+ 
   
   /**
    * This method will add the specified name/quantity to the list in sorted
    * order.  This order is specified by the quantity from low to high.
    */
   public void insert(String name, int quantity)
-  {
+  {    
+    Node temp = head;
+    Node newNode = new Node(name, quantity);
     
-  }  
-}
+    head = newNode;
+    
+    length++;
+    }
+  }
+
